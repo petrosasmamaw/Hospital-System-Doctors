@@ -1,0 +1,273 @@
+:root {
+  --hosp-blue: #1a73e8;        /* Trustworthy Primary Blue */
+  --hosp-blue-dark: #1557b0;   /* Deep Blue for emphasis */
+  --hosp-blue-light: #e8f0fe;  /* Very soft blue for hover backgrounds */
+  --hosp-green: #2ecc71;       /* Health/Recovery Green */
+  --hosp-green-dark: #27ae60;
+  --hosp-white: #ffffff;
+  --hosp-text: #2c3e50;        /* Deep Slate for readability */
+  --hosp-muted: #7f8c8d;       /* Muted gray */
+  --hosp-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Auth form styles (login/register) */
+.auth-container{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  background:linear-gradient(180deg,#f7fbff 0%,#ffffff 100%);
+}
+.auth-form{
+  width:100%;
+  max-width:480px;
+  background:var(--hosp-white);
+  padding:28px;
+  border-radius:14px;
+  box-shadow:0 12px 36px rgba(15,23,42,0.08);
+  border:1px solid rgba(15,23,42,0.03);
+}
+.auth-form h2{margin:0 0 8px 0;font-size:22px;color:var(--hosp-blue)}
+.auth-form p{margin:0 0 12px 0;color:var(--hosp-muted);font-size:0.95rem}
+.auth-form label{display:block;margin-top:12px;font-size:13px;color:var(--hosp-muted)}
+.auth-form input{width:100%;padding:12px 14px;margin-top:8px;border:1px solid rgba(15,23,42,0.06);border-radius:10px;font-size:14px}
+.auth-form button{margin-top:18px;width:100%;padding:12px 14px;background:linear-gradient(90deg,var(--hosp-blue),var(--hosp-blue-dark));color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer}
+.auth-form .error{margin-bottom:8px;padding:8px 10px;background:#fee2e2;color:#991b1b;border-radius:8px}
+.auth-form .success{margin-bottom:8px;padding:8px 10px;background:#ecfeff;color:#065f46;border-radius:8px}
+
+@media (max-width:480px){.auth-form{padding:18px;border-radius:8px}}
+
+/* Main Navigation Container */
+.site-nav {
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  height: 72px;
+  background-color: var(--hosp-white);
+  box-shadow: var(--hosp-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  border-bottom: 2px solid var(--hosp-blue-light);
+}
+
+/* Style for all Links (Dashboard, Books, etc.) */
+.site-nav a {
+  text-decoration: none;
+  color: var(--hosp-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 18px;
+  margin: 0 4px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Hover effect for Navigation Links */
+.site-nav a:hover {
+  color: var(--hosp-blue);
+  background-color: var(--hosp-blue-light);
+}
+
+/* Specifically style the "Dashboard" link to look like a brand if desired, 
+   otherwise it follows the general link style above */
+.site-nav a[href="/"] {
+  color: var(--hosp-blue);
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-right: 20px;
+}
+
+/* Welcome Text (The Span) */
+.site-nav span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-right: 20px;
+  padding: 6px 12px;
+  background: var(--hosp-blue-light);
+  border-radius: 20px;
+  color: var(--hosp-blue-dark) !important; /* Overriding inline muted color */
+}
+
+/* The Logout Button */
+.logout-btn {
+  background-color: var(--hosp-green);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 50px; /* Pill shape for a modern app feel */
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
+}
+
+.logout-btn:hover {
+  background-color: var(--hosp-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+}
+
+/* Styling for Login and Register when logged out */
+.site-nav a[href="/login"] {
+  border: 1.5px solid var(--hosp-blue);
+  color: var(--hosp-blue);
+}
+
+.site-nav a[href="/register"] {
+  background-color: var(--hosp-blue);
+  color: white;
+  margin-left: 10px;
+}
+
+.site-nav a[href="/register"]:hover {
+  background-color: var(--hosp-blue-dark);
+  color: white;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 850px) {
+  .site-nav {
+    padding: 0 15px;
+  }
+  
+  .site-nav a {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .site-nav span {
+    display: none; /* Hide welcome message on small tablets */
+  }
+}
+
+/* Doctor Home Page */
+.doctor-home { font-family: 'Segoe UI', Roboto, Arial, sans-serif; color: var(--hosp-text); }
+.doctor-hero { position: relative; height: 56vh; border-radius: 14px; overflow: hidden; margin: 1.5rem; }
+.hero-image { width:100%; height:100%; object-fit:cover; filter: saturate(0.95) contrast(0.98); display:block }
+.hero-overlay { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:3rem; background: linear-gradient(180deg, rgba(6,8,24,0.12), rgba(6,8,24,0.18)); color: white }
+.hero-overlay h1 { margin:0; font-size:2.6rem; letter-spacing:-0.6px }
+.hero-overlay p { margin-top:10px; max-width:720px; color: rgba(255,255,255,0.9) }
+.hero-actions { margin-top:18px; display:flex; gap:12px }
+.btn-primary { background: linear-gradient(90deg,var(--hosp-blue),var(--hosp-blue-dark)); color: white; padding:10px 16px; border-radius:10px; border:none; font-weight:700; cursor:pointer }
+.btn-ghost { background: rgba(255,255,255,0.12); color: white; padding:10px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); cursor:pointer }
+
+.doctor-cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px; padding: 2rem 1.5rem; margin-top:6px }
+.doc-card { background: white; border-radius:12px; overflow:hidden; box-shadow: var(--hosp-shadow); border:1px solid rgba(15,23,42,0.03); display:flex; gap:12px; align-items:center; padding:12px }
+.doc-card img { width:100px; height:100px; object-fit:cover; border-radius:10px }
+.doc-card-body h3 { margin:0; color:var(--hosp-blue-dark) }
+.doc-card-body p { margin:6px 0 0 0; color:var(--hosp-muted) }
+
+.doctor-gallery { padding: 2rem 1.5rem; }
+.gallery-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:12px }
+.gallery-grid img { width:100%; height:140px; object-fit:cover; border-radius:10px; box-shadow: var(--hosp-shadow); }
+
+@media (max-width: 700px) {
+  .hero-overlay h1 { font-size: 1.6rem }
+  .doctor-hero { height: 42vh }
+  .doc-card { flex-direction: row; }
+}
+
+/* Doctor profile styles */
+.doctor-profile-root { margin: 1.5rem }
+.doctor-profile-header h1 { margin:0; font-size:1.6rem }
+.profile-sub { color: var(--hosp-muted); margin-top:6px }
+.doctor-profile-main { margin-top:12px }
+.doctor-profile-form { background:white; padding:18px; border-radius:12px; box-shadow:var(--hosp-shadow); border:1px solid rgba(15,23,42,0.03); display:flex; flex-direction:column; gap:12px }
+.doctor-profile-form .form-row { display:flex; flex-direction:column }
+.doctor-profile-form .form-row.full { grid-column: 1 / -1 }
+.doctor-profile-form label { font-size:0.9rem; color:var(--hosp-muted); margin-bottom:6px }
+.doctor-profile-form input, .doctor-profile-form select, .doctor-profile-form textarea { width:100%; box-sizing:border-box; padding:10px 12px; border-radius:10px; border:1px solid rgba(15,23,42,0.06); font-size:0.95rem }
+.doctor-profile-form textarea { min-height:120px; resize:vertical }
+.form-actions { display:flex; justify-content:flex-end }
+
+@media (max-width:900px) {
+  .doctor-profile-form { padding:14px }
+}
+
+/* profile image + meta */
+.doctor-top { display:flex; gap:14px; align-items:center }
+.doctor-image { width:96px; height:96px; object-fit:cover; border-radius:12px; box-shadow:var(--hosp-shadow); border:1px solid rgba(15,23,42,0.04) }
+.doctor-image.placeholder { display:flex; align-items:center; justify-content:center; background:#f8fafc; color:var(--hosp-muted) }
+.doctor-top-meta { display:flex; flex-direction:column }
+.doctor-status { padding:6px 10px; border-radius:999px; font-weight:700; width:fit-content; margin-bottom:8px }
+.doctor-status.active { background: var(--hosp-green); color:white }
+.doctor-status.pending { background: #f59e0b; color:white }
+.doctor-name { font-weight:800; color:var(--hosp-blue-dark) }
+.doctor-cat { color:var(--hosp-muted) }
+
+/* pending form styling */
+.doctor-profile-form.pending { border:1px solid rgba(245,158,11,0.18); box-shadow: 0 8px 30px rgba(245,158,11,0.06) }
+
+.btn-ghost { background: transparent; border:1px solid rgba(15,23,42,0.06); padding:8px 14px; border-radius:10px; cursor:pointer }
+
+/* Books list styles */
+.books-list-root { margin: 1.5rem; font-family: 'Segoe UI', Roboto, Arial, sans-serif; color: var(--hosp-text) }
+.books-header h1 { margin: 0; font-size: 1.6rem }
+.books-sub { color: var(--hosp-muted); margin-top:6px }
+.books-list { margin-top:12px }
+.books-grid { display:grid; gap:12px }
+.book-item { display:flex; justify-content:space-between; align-items:center; padding:12px; background:white; border-radius:10px; box-shadow:var(--hosp-shadow); border:1px solid rgba(15,23,42,0.03) }
+.book-main { display:flex; flex-direction:column }
+.book-date { font-weight:700; color:var(--hosp-blue-dark) }
+.book-patient { color:var(--hosp-muted); margin-top:6px }
+.book-notes { margin-top:8px; color:#334155 }
+.book-actions { display:flex; gap:8px }
+
+.book-patient-name { font-weight:700; color:var(--hosp-blue-dark); margin-top:6px }
+.book-patient-meta { color:var(--hosp-muted); font-size:0.95rem; margin-top:4px }
+
+@media (max-width:700px) {
+  .book-item { flex-direction:column; align-items:flex-start }
+  .book-actions { width:100%; display:flex; justify-content:flex-end }
+}
+
+/* Room / Report page styles */
+.page { margin: 1.5rem; font-family: 'Segoe UI', Roboto, Arial, sans-serif; color: var(--hosp-text) }
+.doctor-profile-form { max-width: 820px; margin: 0 auto; background: white; }
+.doctor-profile-form .form-row { gap: 8px }
+.doctor-profile-form label { font-size: 0.95rem; color: var(--hosp-muted); margin-bottom:6px }
+.doctor-profile-form input { padding:10px 12px; border-radius:10px; border:1px solid rgba(15,23,42,0.06); background: #fbfdff }
+.doctor-profile-form textarea { min-height: 160px; padding:12px; border-radius:10px; border:1px solid rgba(15,23,42,0.08); font-size:0.95rem; resize:vertical }
+.form-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:8px }
+.form-actions .btn-primary { padding:10px 16px }
+.form-actions .btn-ghost { padding:10px 16px }
+.report-box { white-space: pre-wrap; background: #ffffff; padding: 12px; border-radius: 8px; border: 1px solid rgba(15,23,42,0.06); margin-top: 12px }
+
+@media (max-width:700px) {
+  .doctor-profile-form { padding: 14px }
+  .form-actions { justify-content: stretch; gap:8px }
+  .form-actions button { width: 100% }
+}
+
+/* Reports page additions */
+.reports-sub-detail {
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  /* gradient text */
+  background: linear-gradient(90deg, #7b42ff 0%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.reports-footer { text-align: center; margin-top: 20px }
+.reports-footer .footer-text {
+  margin: 0 auto;
+  max-width: 820px;
+  padding: 8px 12px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff7a18 0%, #af002d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
