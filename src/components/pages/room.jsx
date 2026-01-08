@@ -60,6 +60,17 @@ export default function Room({ user }) {
 		if (!currentReport) return;
 		await dispatch(updateReport({ reportId: currentReport._id, updatedData: { report: text } }));
 		if (doctorId) await dispatch(fetchReportsByDoctorId(doctorId));
+
+		// Also set the related booking to checkedIn when updating a report
+		try {
+			const booksForPatient = await dispatch(fetchBooksByPatientId(patientId)).unwrap();
+			const bookToUpdate = (booksForPatient || []).find((b) => b.DoctorId === doctorId || b.DoctorId === doctorId);
+			if (bookToUpdate) {
+				await dispatch(updateBook({ bookId: bookToUpdate._id, updatedData: { status: "checkedIn" } }));
+			}
+		} catch (e) {
+			console.error('Failed to set booking to checkedIn', e);
+		}
 	};
 
 	return (
