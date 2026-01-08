@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const CLIENTAPI_URL = "http://localhost:5000/api/books/";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const CLIENTAPI_URL = `${API_BASE}/api/books/`;
 
 // Async Thunks
 export const fetchBooks = createAsyncThunk("books/fetchBooks", async () => {
