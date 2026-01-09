@@ -9,6 +9,7 @@ import Room from "./components/pages/room.jsx";
 import Login from "./components/pages/login.jsx";
 import Register from "./components/pages/register.jsx";
 import Navbar from "./components/pages/navbar.jsx";
+import Footer from "./components/pages/Footer.jsx";
 import Profile from "./components/pages/profile.jsx";
 import Report from "./components/pages/reports.jsx";
 
@@ -65,6 +66,7 @@ function AppInner() {
 			<main style={{ padding: 20 }}>
 				<AppRoutes user={user} />
 			</main>
+			<Footer />
 		</div>
 	);
 }

@@ -48,10 +48,14 @@
   box-shadow: var(--hosp-shadow);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1006; /* keep nav above page overlay */
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   border-bottom: 2px solid var(--hosp-blue-light);
 }
+
+/* Brand / title should not wrap */
+.site-nav .nav-brand { display: flex; align-items: center; gap: 12px; }
+.site-nav .nav-brand h1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; font-size: 1.05rem; }
 
 /* Style for all Links (Dashboard, Books, etc.) */
 .site-nav a {
@@ -270,4 +274,119 @@
   background: linear-gradient(90deg, #ff7a18 0%, #af002d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Footer styles (copied/adapted from admin theme) */
+.site-footer {
+  margin-top: 40px;
+  background: linear-gradient(180deg, #ffffff, #f7fbff);
+  border-top: 1px solid rgba(15,23,42,0.04);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 36px 24px;
+}
+
+.footer-col h3,
+.footer-col h4 { margin-bottom: 8px }
+
+.footer-links { list-style: none; padding: 0; margin: 0 }
+.footer-links li { margin: 6px 0 }
+.footer-links a { color: var(--hosp-blue); font-weight: 600 }
+
+.footer-bottom { border-top: 1px solid rgba(15,23,42,0.03); padding: 12px 0 }
+
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr; padding: 24px 16px }
+}
+
+/* Hamburger and mobile nav for doctor frontend */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 8px;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--hosp-text);
+  margin: 4px 0;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+.hamburger.is-active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.hamburger.is-active span:nth-child(2) { opacity: 0 }
+.hamburger.is-active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.nav-items { display: flex; gap: 18px; align-items: center; width: 100% }
+
+@media (max-width: 700px) {
+  .hamburger { display: inline-flex }
+  .nav-items { display: none; flex-direction: column; gap: 8px; padding-top: 8px }
+  .nav-items.open { display: flex }
+  .nav-brand { display: flex; justify-content: space-between; align-items: center; width: 100% }
+  .site-nav { flex-wrap: wrap; padding: 10px 14px }
+  .site-nav a { width: 100%; padding: 10px 12px; border-radius: 8px }
+  .logout-btn, .site-nav a[href="/register"] { width: 100%; box-sizing: border-box }
+  .site-nav span { width: 100%; text-align: left }
+}
+
+/* Mobile-specific adjustments to keep hamburger inside the nav and provide overlay */
+@media (max-width: 700px) {
+  .site-nav { padding: 8px 12px; height: auto; }
+
+  /* make sure brand and hamburger sit on same row */
+  .nav-brand { order: 1; width: auto; }
+  .hamburger { order: 2; margin-left: auto; display: inline-flex; }
+
+  /* when nav is open, show the menu as a boxed panel and add a dim overlay */
+  .nav-items.open {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    background: var(--hosp-white);
+    box-shadow: 0 12px 40px rgba(2,6,23,0.12);
+    border-radius: 10px;
+    position: absolute; /* float below the nav */
+    top: calc(100% + 8px);
+    left: 8px;
+    right: 8px;
+    z-index: 1007; /* above overlay and nav */
+  }
+
+  /* overlay behind the opened menu that covers the page but stays under the nav */
+  .nav-items.open::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.32);
+    z-index: 1005; /* below nav (1006) and menu (1007) */
+  }
+
+  /* ensure links & buttons are full width and visible above overlay */
+  .nav-items.open a,
+  .nav-items.open .logout-btn,
+  .nav-items.open .site-nav span,
+  .nav-items.open .btn-ghost {
+    position: relative;
+    z-index: 1008;
+    width: 100%;
+  }
+
+  /* keep hamburger clickable and visible above overlay */
+  .hamburger { position: relative; z-index: 1009 }
 }
