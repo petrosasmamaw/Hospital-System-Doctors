@@ -41,7 +41,7 @@ export default function Home() {
 				<img src={hospitalMain} alt="hospital" className="hero-image" />
 				<div className="hero-overlay">
 					<motion.h1 initial={{ y: -12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }}>
-						Welcome to Our Doctor Portal
+						Dengel Hospital Welcome to Our Doctor Portal
 					</motion.h1>
 					<motion.p initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }}>
 						Manage patients, view reports, and coordinate care using a modern,
