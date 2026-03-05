@@ -21,7 +21,6 @@ export default function Navbar({ user }) {
 		{ to: "/", label: "Home", icon: "🏠" },
 		{ to: "/books", label: "Appointments", icon: "📅" },
 		{ to: "/report", label: "Reports", icon: "📊" },
-		{ to: "/room", label: "Rooms", icon: "🏥" },
 		{ to: "/profile", label: "Profile", icon: "👤" },
 	];
 
