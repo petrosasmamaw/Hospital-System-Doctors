@@ -1,48 +1,70 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../slices/slice/authSlice";
 
 export default function Navbar({ user }) {
-    const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const handleLogout = async () => {
 		try {
 			await dispatch(logoutUser());
-		} catch (e) {}
+		} catch (e) {
+			// ignore
+		}
 		navigate("/login");
 	};
 
-	return (
-		<nav className={`site-nav ${open ? "open" : ""}`}>
-			<div className="nav-brand">
-				<h1>Dengel Hospital</h1>
-			</div>
-			<button className={`hamburger ${open ? "is-active" : ""}`} onClick={() => setOpen(!open)} aria-label="Toggle menu">
-				<span />
-				<span />
-				<span />
-			</button>
+	const navItems = [
+		{ to: "/", label: "Home", icon: "🏠" },
+		{ to: "/books", label: "Appointments", icon: "📅" },
+		{ to: "/report", label: "Reports", icon: "📊" },
+		{ to: "/room", label: "Rooms", icon: "🏥" },
+		{ to: "/profile", label: "Profile", icon: "👤" },
+	];
 
-			{user ? (
-				<div className={`nav-items ${open ? "open" : ""}`}>
-					<Link to="/">Home</Link>
-					<Link to="/books">Books</Link>
-					<Link to="/report">Reports</Link>
-					<div style={{ flex: 1 }} />
-					<span style={{ color: "var(--hosp-muted)" }}>Welcome, {user.name || user.email}</span>
-					<Link to="/profile">Profile</Link>
-					<button className="logout-btn" onClick={handleLogout}>Logout</button>
+	return (
+		<nav className="site-nav">
+			<div className="sidebar-top">
+				<div className="sidebar-logo">DENGEL DOCTOR</div>
+				<div className="sidebar-menu">
+					{user
+						? navItems.map((item) => {
+								const active = location.pathname === item.to;
+								return (
+									<Link key={item.to} to={item.to} className={`sidebar-item ${active ? "active" : ""}`}>
+										<span className="sidebar-icon" aria-hidden="true">{item.icon}</span>
+										<span className="sidebar-label">{item.label}</span>
+									</Link>
+								);
+							})
+						: (
+							<>
+								<Link to="/login" className="sidebar-item">
+									<span className="sidebar-icon" aria-hidden="true">🔑</span>
+									<span className="sidebar-label">Login</span>
+								</Link>
+								<Link to="/register" className="sidebar-item">
+									<span className="sidebar-icon" aria-hidden="true">📝</span>
+									<span className="sidebar-label">Register</span>
+								</Link>
+							</>
+						)}
 				</div>
-			) : (
-				<div className={`nav-items ${open ? "open" : ""}`}>
-					<div style={{ flex: 1 }} />
-					<Link to="/login">Login</Link>
-					<Link to="/register">Register</Link>
-				</div>
-			)}
+			</div>
+			<div className="sidebar-bottom">
+				{user && (
+					<div className="sidebar-user">
+						<div className="sidebar-avatar">{(user.name || user.email || "?").charAt(0).toUpperCase()}</div>
+						<div className="sidebar-user-info">
+							<p className="sidebar-user-name">{user.name || user.email}</p>
+							<button type="button" className="sidebar-logout" onClick={handleLogout}>Logout</button>
+						</div>
+					</div>
+				)}
+			</div>
 		</nav>
 	);
 }

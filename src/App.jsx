@@ -61,12 +61,16 @@ function AppInner() {
 	}, [auth.status, auth.user, location.pathname, navigate]);
 
 	return (
-		<div>
-			<Navbar user={user} />
-			<main style={{ padding: 20 }}>
-				<AppRoutes user={user} />
-			</main>
-			<Footer />
+		<div className="app-root">
+			<div className="app-shell">
+				<Navbar user={user} />
+				<div className="app-main">
+					<main className="app-content">
+						<AppRoutes user={user} />
+					</main>
+					<Footer />
+				</div>
+			</div>
 		</div>
 	);
 }
